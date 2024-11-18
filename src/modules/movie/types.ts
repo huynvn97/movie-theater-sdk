@@ -24,3 +24,8 @@ export type GetMovieOptions = {
     sort_by?: 'popularity.desc';
   };
 };
+
+export type GetMovieResponse = {
+  page: number;
+  results: Movie[];
+};
