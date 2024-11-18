@@ -9,7 +9,6 @@ async function getMovies(options?: GetMovieOptions): Promise<Movie[]> {
   const result = await httpClient.get('/discover/movie', {
     params: options?.params,
   });
-
   return result.data;
 }
 

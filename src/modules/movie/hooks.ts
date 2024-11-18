@@ -1,21 +1,15 @@
-import {useCallback, useEffect, useState} from 'react';
-import {Movie} from './types';
-import MovieApis from './apis';
+import {useCallback, useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppDispatch, RootState} from '../../stateManager/store';
+import {fetchMoviesAction} from './actions';
 
 export function useGetMovies() {
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [isFetching, setIsFetching] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
+  const dispatch = useDispatch() as AppDispatch;
+  const {movies, error, status} = useSelector(
+    (state: RootState) => state.movie,
+  );
   const fetchMovies = useCallback(async () => {
-    setIsFetching(true);
-    try {
-      const movies = await MovieApis.getMovies();
-      setMovies(movies);
-    } catch (e) {
-    } finally {
-      setIsFetching(false);
-    }
+    dispatch(fetchMoviesAction());
   }, []);
 
   useEffect(() => {
@@ -24,7 +18,8 @@ export function useGetMovies() {
 
   return {
     movies,
-    isFetching,
+    isFetching: status === 'pending',
+    status,
     error,
   };
 }
