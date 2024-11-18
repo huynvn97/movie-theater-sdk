@@ -1,0 +1,13 @@
+{
+  "name": "movie-theater-sdk",
+  "version": "1.0.0",
+  "description": "SDK for mobile theater app and web",
+  "main": "index.js",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.3.0",
+    "axios": "^1.7.7",
+    "react-redux": "^9.1.2"
+  }
+}
