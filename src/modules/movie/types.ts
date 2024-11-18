@@ -22,6 +22,7 @@ export type GetMovieOptions = {
     language?: 'en-US'; // only support en for now
     page?: number;
     sort_by?: 'popularity.desc';
+    query?: string; // use for search
   };
 };
 
