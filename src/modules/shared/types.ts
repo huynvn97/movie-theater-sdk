@@ -6,3 +6,9 @@ export type APIResponse<TData> = {
   total_results: number;
   results: TData[];
 };
+
+export type BaseState<TData> = {
+  status: NetworkStatus;
+  data: TData;
+  error: string | null;
+};

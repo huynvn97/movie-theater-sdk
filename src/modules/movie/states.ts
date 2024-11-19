@@ -5,24 +5,16 @@ import {
   fetchMoviesAction,
   fetchSearchMoviesAction,
 } from './actions';
-import {NetworkStatus} from '../shared/types';
+import {BaseState, NetworkStatus} from '../shared/types';
 
 export interface MovieState {
   status: NetworkStatus;
   movies: Movie[];
   error: string | null;
 
-  search: {
-    status: NetworkStatus;
-    data: Movie[];
-    error: string | null;
-  };
+  search: BaseState<Movie[]>;
 
-  reviews: {
-    status: NetworkStatus;
-    data: MovieReview[];
-    error: string | null;
-  };
+  reviews: BaseState<MovieReview[]>;
 }
 
 const initialState: MovieState = {

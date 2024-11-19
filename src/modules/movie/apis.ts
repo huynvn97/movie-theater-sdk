@@ -39,8 +39,6 @@ async function getMovieReviews(
     params: {},
   });
 
-  console.log(result, 'ne')
-
   return result.data;
 }
 
