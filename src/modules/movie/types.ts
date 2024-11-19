@@ -101,7 +101,7 @@ export type MovieDetails = {
 export type GetMovieDetailOptions = {
   id: number;
 };
-export type GetMovieDetailResponse = APIResponse<MovieDetails>;
+export type GetMovieDetailResponse = MovieDetails;
 
 // ** KEYWORDS **
 export type MovieKeyword = {

@@ -104,7 +104,7 @@ export const movieSlice = createSlice({
     });
     builder.addCase(fetchMovieDetailAction.fulfilled, (state, action) => {
       state.detail.status = 'fulfilled';
-      state.detail.data = action?.payload?.results || ({} as MovieDetails);
+      state.detail.data = action?.payload || ({} as MovieDetails);
     });
     builder.addCase(fetchMovieDetailAction.rejected, (state, action) => {
       state.detail.status = 'rejected';
