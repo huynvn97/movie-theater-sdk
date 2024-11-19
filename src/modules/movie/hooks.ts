@@ -34,6 +34,7 @@ export function useGetMovies(options?: GetMovieOptions) {
     loading: status === 'pending',
     status,
     error,
+    runFetchMovies: fetchMovies,
   };
 }
 
