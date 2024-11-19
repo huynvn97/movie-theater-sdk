@@ -115,3 +115,25 @@ export type GetMovieKeywordsResponse = {
   id: number;
   keywords: MovieKeyword[];
 };
+
+// ** ACTORS **
+export type MovieActor = {
+  adult: boolean;
+  gender: number;
+  id: number;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity: number;
+  profile_path: null;
+  credit_id: string;
+  department: string;
+  job: string;
+};
+export type GetMovieActorsOptions = {
+  id: number;
+};
+export type GetMovieActorsResponse = {
+  id: number;
+  cast: MovieActor[];
+};

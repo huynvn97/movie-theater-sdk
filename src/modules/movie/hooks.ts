@@ -2,6 +2,7 @@ import {useCallback, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../../stateManager/store';
 import {
+  fetchMovieActorsAction,
   fetchMovieDetailAction,
   fetchMovieKeywordsAction,
   fetchMovieReviewsAction,
@@ -9,6 +10,7 @@ import {
   fetchSearchMoviesAction,
 } from './actions';
 import {
+  GetMovieActorsOptions,
   GetMovieDetailOptions,
   GetMovieOptions,
   GetMovieReviewOptions,
@@ -122,5 +124,28 @@ export function useMovieKeywords(options: GetMovieReviewOptions) {
     status,
     error,
     runFetchMovieKeywords: fetchMovieKeywords,
+  };
+}
+
+export function useMovieActors(options: GetMovieActorsOptions) {
+  const dispatch = useDispatch() as AppDispatch;
+  const {data, error, status} = useSelector(
+    (state: RootState) => state.movie.actors,
+  );
+
+  const fetchMovieActors = useCallback(async () => {
+    dispatch(fetchMovieActorsAction(options));
+  }, [options]);
+
+  useEffect(() => {
+    fetchMovieActors();
+  }, []);
+
+  return {
+    data,
+    loading: status === 'pending',
+    status,
+    error,
+    runFetchMovieActors: fetchMovieActors,
   };
 }
