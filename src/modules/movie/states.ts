@@ -1,6 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {Movie, MovieReview} from './types';
+import {Movie, MovieDetails, MovieReview} from './types';
 import {
+  fetchMovieDetailAction,
   fetchMovieReviewsAction,
   fetchMoviesAction,
   fetchSearchMoviesAction,
@@ -15,6 +16,8 @@ export interface MovieState {
   search: BaseState<Movie[]>;
 
   reviews: BaseState<MovieReview[]>;
+
+  detail: BaseState<MovieDetails>;
 }
 
 const initialState: MovieState = {
@@ -30,6 +33,11 @@ const initialState: MovieState = {
 
   reviews: {
     data: [],
+    status: 'idle',
+    error: null,
+  },
+  detail: {
+    data: {} as MovieDetails,
     status: 'idle',
     error: null,
   },
@@ -78,6 +86,19 @@ export const movieSlice = createSlice({
     builder.addCase(fetchMovieReviewsAction.rejected, (state, action) => {
       state.reviews.status = 'rejected';
       state.reviews.error = action.error.message || 'Something went wrong';
+    });
+
+    builder.addCase(fetchMovieDetailAction.pending, state => {
+      state.detail.status = 'pending';
+      state.detail.error = null;
+    });
+    builder.addCase(fetchMovieDetailAction.fulfilled, (state, action) => {
+      state.detail.status = 'fulfilled';
+      state.detail.data = action?.payload?.results || {} as MovieDetails;
+    });
+    builder.addCase(fetchMovieDetailAction.rejected, (state, action) => {
+      state.detail.status = 'rejected';
+      state.detail.error = action.error.message || 'Something went wrong';
     });
   },
 });
