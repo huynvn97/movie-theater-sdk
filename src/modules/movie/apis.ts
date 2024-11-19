@@ -2,6 +2,8 @@ import httpClient from '../../utils/httpClient';
 import {
   GetMovieDetailOptions,
   GetMovieDetailResponse,
+  GetMovieKeywordsOptions,
+  GetMovieKeywordsResponse,
   GetMovieOptions,
   GetMovieResponse,
   GetMovieReviewOptions,
@@ -54,11 +56,21 @@ async function getMovieDetail(
   return result.data;
 }
 
+async function getMovieKeywords(
+  options: GetMovieKeywordsOptions,
+): Promise<GetMovieKeywordsResponse> {
+  const result = await httpClient.get(`/movie/${options.id}/keywords`, {
+    params: {},
+  });
+  return result.data;
+}
+
 const MovieApis = {
   getMovies,
   searchMovies,
   getMovieReviews,
   getMovieDetail,
+  getMovieKeywords,
 };
 
 export default MovieApis;

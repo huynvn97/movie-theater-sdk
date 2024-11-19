@@ -1,7 +1,8 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {Movie, MovieDetails, MovieReview} from './types';
+import {Movie, MovieDetails, MovieKeyword, MovieReview} from './types';
 import {
   fetchMovieDetailAction,
+  fetchMovieKeywordsAction,
   fetchMovieReviewsAction,
   fetchMoviesAction,
   fetchSearchMoviesAction,
@@ -18,6 +19,8 @@ export interface MovieState {
   reviews: BaseState<MovieReview[]>;
 
   detail: BaseState<MovieDetails>;
+
+  keywords: BaseState<MovieKeyword[]>;
 }
 
 const initialState: MovieState = {
@@ -36,8 +39,15 @@ const initialState: MovieState = {
     status: 'idle',
     error: null,
   },
+
   detail: {
     data: {} as MovieDetails,
+    status: 'idle',
+    error: null,
+  },
+
+  keywords: {
+    data: [],
     status: 'idle',
     error: null,
   },
@@ -94,11 +104,24 @@ export const movieSlice = createSlice({
     });
     builder.addCase(fetchMovieDetailAction.fulfilled, (state, action) => {
       state.detail.status = 'fulfilled';
-      state.detail.data = action?.payload?.results || {} as MovieDetails;
+      state.detail.data = action?.payload?.results || ({} as MovieDetails);
     });
     builder.addCase(fetchMovieDetailAction.rejected, (state, action) => {
       state.detail.status = 'rejected';
       state.detail.error = action.error.message || 'Something went wrong';
+    });
+
+    builder.addCase(fetchMovieKeywordsAction.pending, state => {
+      state.keywords.status = 'pending';
+      state.keywords.error = null;
+    });
+    builder.addCase(fetchMovieKeywordsAction.fulfilled, (state, action) => {
+      state.keywords.status = 'fulfilled';
+      state.keywords.data = action.payload?.keywords || [];
+    });
+    builder.addCase(fetchMovieKeywordsAction.rejected, (state, action) => {
+      state.keywords.status = 'rejected';
+      state.keywords.error = action.error.message || 'Something went wrong';
     });
   },
 });

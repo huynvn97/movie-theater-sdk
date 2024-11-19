@@ -1,5 +1,6 @@
 import {APIResponse} from '../shared/types';
 
+// ** LIST MOVIE **
 export type Movie = {
   adult: boolean;
   backdrop_path: string;
@@ -28,6 +29,7 @@ export type GetMovieOptions = {
 };
 export type GetMovieResponse = APIResponse<Movie[]>;
 
+// ** REVIEWS **
 export type MovieReview = {
   id: string;
   author: string;
@@ -47,6 +49,7 @@ export type GetMovieReviewOptions = {
 };
 export type GetMovieReviewResponse = APIResponse<MovieReview[]>;
 
+// ** DETAIl **
 export type MovieDetails = {
   adult: boolean;
   backdrop_path: string;
@@ -95,8 +98,20 @@ export type MovieDetails = {
   vote_average: number;
   vote_count: number;
 };
-
 export type GetMovieDetailOptions = {
   id: number;
 };
 export type GetMovieDetailResponse = APIResponse<MovieDetails>;
+
+// ** KEYWORDS **
+export type MovieKeyword = {
+  id: number;
+  name: string;
+};
+export type GetMovieKeywordsOptions = {
+  id: number;
+};
+export type GetMovieKeywordsResponse = {
+  id: number;
+  keywords: MovieKeyword[];
+};
