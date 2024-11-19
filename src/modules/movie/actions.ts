@@ -1,6 +1,6 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import MovieApis from './apis';
-import {GetMovieOptions} from './types';
+import {GetMovieOptions, GetMovieReviewOptions} from './types';
 
 export const fetchMoviesAction = createAsyncThunk(
   'movie/fetchMovies',
@@ -20,6 +20,18 @@ export const fetchSearchMoviesAction = createAsyncThunk(
     try {
       const movies = await MovieApis.searchMovies(options);
       return movies;
+    } catch (e: any) {
+      thunkAPI.rejectWithValue(e?.message || 'Something went wrong');
+    }
+  },
+);
+
+export const fetchMovieReviewsAction = createAsyncThunk(
+  'movie/fetchMovieReviews',
+  async (options: GetMovieReviewOptions, thunkAPI) => {
+    try {
+      const reviews = await MovieApis.getMovieReviews(options);
+      return reviews;
     } catch (e: any) {
       thunkAPI.rejectWithValue(e?.message || 'Something went wrong');
     }

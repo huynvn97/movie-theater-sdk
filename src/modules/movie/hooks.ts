@@ -1,8 +1,12 @@
 import {useCallback, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../../stateManager/store';
-import {fetchMoviesAction, fetchSearchMoviesAction} from './actions';
-import {GetMovieOptions} from './types';
+import {
+  fetchMovieReviewsAction,
+  fetchMoviesAction,
+  fetchSearchMoviesAction,
+} from './actions';
+import {GetMovieOptions, GetMovieReviewOptions} from './types';
 
 export function useGetMovies(options?: GetMovieOptions) {
   const dispatch = useDispatch() as AppDispatch;
@@ -43,5 +47,28 @@ export function useSearchMovies(options?: GetMovieOptions) {
     status,
     error,
     runSearchMovie,
+  };
+}
+
+export function useMovieReviews(options: GetMovieReviewOptions) {
+  const dispatch = useDispatch() as AppDispatch;
+  const {data, error, status} = useSelector(
+    (state: RootState) => state.movie.reviews,
+  );
+
+  const fetchMovieReviews = useCallback(async () => {
+    dispatch(fetchMovieReviewsAction(options));
+  }, [options]);
+
+  useEffect(() => {
+    fetchMovieReviews();
+  }, []);
+
+  return {
+    data,
+    loading: status === 'pending',
+    status,
+    error,
+    runFetchMovieReviews: fetchMovieReviews,
   };
 }

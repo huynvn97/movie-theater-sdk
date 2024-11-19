@@ -1,5 +1,11 @@
 import httpClient from '../../utils/httpClient';
-import {GetMovieOptions, GetMovieResponse, Movie} from './types';
+import {
+  GetMovieOptions,
+  GetMovieResponse,
+  GetMovieReviewOptions,
+  GetMovieReviewResponse,
+  Movie,
+} from './types';
 
 /**
  * Get list of discover movies from themoviedb API
@@ -26,9 +32,22 @@ async function searchMovies(
   return result.data;
 }
 
+async function getMovieReviews(
+  options: GetMovieReviewOptions,
+): Promise<GetMovieReviewResponse> {
+  const result = await httpClient.get(`/movie/${options.id}/reviews`, {
+    params: {},
+  });
+
+  console.log(result, 'ne')
+
+  return result.data;
+}
+
 const MovieApis = {
   getMovies,
   searchMovies,
+  getMovieReviews,
 };
 
 export default MovieApis;

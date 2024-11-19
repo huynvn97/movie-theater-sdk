@@ -1,3 +1,5 @@
+import {APIResponse} from '../shared/types';
+
 export type Movie = {
   adult: boolean;
   backdrop_path: string;
@@ -14,7 +16,6 @@ export type Movie = {
   vote_average: number;
   vote_count: number;
 };
-
 export type GetMovieOptions = {
   params?: {
     include_adult?: boolean;
@@ -25,8 +26,23 @@ export type GetMovieOptions = {
     query?: string; // use for search
   };
 };
+export type GetMovieResponse = APIResponse<Movie>;
 
-export type GetMovieResponse = {
-  page: number;
-  results: Movie[];
+export type MovieReview = {
+  id: string;
+  author: string;
+  author_details: {
+    name: string;
+    username: string;
+    avatar_path: string | null;
+    rating: number | null;
+  };
+  content: string;
+  created_at: string;
+  updated_at: string;
+  url: string;
 };
+export type GetMovieReviewOptions = {
+  id: number;
+};
+export type GetMovieReviewResponse = APIResponse<MovieReview>;
