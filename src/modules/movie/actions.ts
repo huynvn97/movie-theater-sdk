@@ -15,7 +15,7 @@ export const fetchMoviesAction = createAsyncThunk(
       const movies = await MovieApis.getMovies(options);
       return movies;
     } catch (e: any) {
-      thunkAPI.rejectWithValue(e?.message || 'Something went wrong');
+      return thunkAPI.rejectWithValue(e?.message || 'Something went wrong');
     }
   },
 );
@@ -27,7 +27,7 @@ export const fetchSearchMoviesAction = createAsyncThunk(
       const movies = await MovieApis.searchMovies(options);
       return movies;
     } catch (e: any) {
-      thunkAPI.rejectWithValue(e?.message || 'Something went wrong');
+      return thunkAPI.rejectWithValue(e?.message || 'Something went wrong');
     }
   },
 );
@@ -39,7 +39,7 @@ export const fetchMovieReviewsAction = createAsyncThunk(
       const reviews = await MovieApis.getMovieReviews(options);
       return reviews;
     } catch (e: any) {
-      thunkAPI.rejectWithValue(e?.message || 'Something went wrong');
+      return thunkAPI.rejectWithValue(e?.message || 'Something went wrong');
     }
   },
 );
@@ -51,7 +51,7 @@ export const fetchMovieDetailAction = createAsyncThunk(
       const detail = await MovieApis.getMovieDetail(options);
       return detail;
     } catch (e: any) {
-      thunkAPI.rejectWithValue(e?.message || 'Something went wrong');
+      return thunkAPI.rejectWithValue(e?.message || 'Something went wrong');
     }
   },
 );
@@ -63,7 +63,7 @@ export const fetchMovieKeywordsAction = createAsyncThunk(
       const keywords = await MovieApis.getMovieKeywords(options);
       return keywords;
     } catch (e: any) {
-      thunkAPI.rejectWithValue(e?.message || 'Something went wrong');
+      return thunkAPI.rejectWithValue(e?.message || 'Something went wrong');
     }
   },
 );
@@ -75,7 +75,7 @@ export const fetchMovieActorsAction = createAsyncThunk(
       const actors = await MovieApis.getMovieActors(options);
       return actors;
     } catch (e: any) {
-      thunkAPI.rejectWithValue(e?.message || 'Something went wrong');
+      return thunkAPI.rejectWithValue(e?.message || 'Something went wrong');
     }
   },
 );
